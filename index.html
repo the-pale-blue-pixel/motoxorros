@@ -34,7 +34,10 @@
     .about-back svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
     .about-back:hover{filter:drop-shadow(0 0 6px #9dff0090)}
     .about-background{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000}
-    .about-background video{width:100%;height:100%;object-fit:cover;filter:blur(4px) saturate(.35);transform:scale(1.04);opacity:.23}
+    .about-background video,.about-background img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(4px) saturate(.35);transform:scale(1.04);opacity:.23}
+    .about-background video{opacity:0}
+    .about-background.is-playing video{opacity:.23}
+    .about-background.is-playing img{opacity:0}
     .about-background::after{content:'';position:absolute;inset:0;background:url('assets/grain.svg');opacity:.13}
     #acerca .columns{position:relative;z-index:1}
     #spark{position:fixed;left:0;top:0;width:18px;height:2px;background:var(--green);box-shadow:0 0 7px #9dff00;pointer-events:none;z-index:8;opacity:0;transform:translate(-100px,-100px) skewX(-30deg);transition:opacity .18s}
@@ -59,7 +62,8 @@
     <section id="acerca" aria-label="Acerca" hidden>
       <a class="about-back" href="#inicio" aria-label="Volver al inicio" title="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7M5 12h14"/></svg></a>
       <div class="about-background" aria-hidden="true">
-        <video id="about-video" muted loop playsinline preload="none" poster="assets/acerca-poster.jpg" tabindex="-1">
+        <img src="assets/acerca-poster.jpg" alt="">
+        <video id="about-video" muted loop playsinline webkit-playsinline preload="metadata" poster="assets/acerca-poster.jpg" tabindex="-1">
           <source src="assets/acerca-loop.mp4" type="video/mp4">
         </video>
       </div>
@@ -87,6 +91,11 @@
     const spark = document.querySelector('#spark');
     const backgroundVideo = document.querySelector('#about-video');
     const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
+    backgroundVideo.muted = true;
+    backgroundVideo.defaultMuted = true;
+    backgroundVideo.playsInline = true;
+    backgroundVideo.addEventListener('playing', () => backgroundVideo.parentElement.classList.add('is-playing'));
+    backgroundVideo.addEventListener('error', () => backgroundVideo.parentElement.classList.remove('is-playing'));
     function syncVideo() {
       if (!about.hidden && !document.hidden && !reducedMotion.matches) {
         backgroundVideo.play().catch(() => {});
@@ -94,8 +103,8 @@
     }
     document.addEventListener('visibilitychange', syncVideo);
     reducedMotion.addEventListener('change', syncVideo);
-    function showPage() {
-      const isAbout = ['#acerca', '#bio', '#statement'].includes(location.hash);
+    function showPage(hash = location.hash) {
+      const isAbout = ['#acerca', '#bio', '#statement'].includes(hash);
       home.hidden = isAbout;
       about.hidden = !isAbout;
       document.querySelector('header').hidden = isAbout;
@@ -109,7 +118,12 @@
         document.querySelector(location.hash).scrollIntoView();
       } else scrollTo(0, 0);
     }
-    addEventListener('hashchange', showPage);
+    // Start playback inside the tap event to preserve mobile user activation.
+    aboutLink.addEventListener('click', () => showPage('#acerca'));
+    about.addEventListener('click', event => {
+      if (!event.target.closest('a') && backgroundVideo.paused) syncVideo();
+    });
+    addEventListener('hashchange', () => showPage());
     showPage();
     const pointerEffect = matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)');
     let fadeTimer;
