@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="MOTOXORROS. Bio y statement.">
+  <title>MOTOXORROS</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <style>
+    @font-face{font-family:ProRacing;src:url('assets/pro-racing.otf') format('opentype');font-display:swap}
+    @font-face{font-family:Sanva;src:url('assets/sanva.ttf') format('truetype');font-display:swap}
+    :root{color-scheme:dark;--green:#9dff00;--white:#e9e9e9}
+    *{box-sizing:border-box}
+    html{scroll-padding-top:110px}
+    [hidden]{display:none!important}
+    body{margin:0;background:#000;color:var(--white);font-family:Sanva,Arial,sans-serif;letter-spacing:0}
+    ::selection{background:var(--green);color:#000}
+    a{color:inherit;text-decoration:none}
+    header{position:fixed;inset:0 0 auto;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:25px 5%;background:linear-gradient(#000c,transparent)}
+    header{background:#000}
+    .title{font-family:ProRacing,Arial,sans-serif;font-weight:400;color:var(--green);letter-spacing:0}
+    .link{position:relative;display:inline-block;padding:8px 0;transition:text-shadow .25s}
+    .link::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .25s;box-shadow:0 0 9px #9dff0070}
+    .link:hover,.link:focus-visible,.link[aria-current],.link.active{text-shadow:0 0 8px #9dff00b3,0 0 24px #9dff0080}
+    .link:hover::after,.link:focus-visible::after,.link[aria-current]::after,.link.active::after{transform:scaleX(1)}
+    :focus-visible{outline:1px solid var(--green);outline-offset:8px}
+    .brand{font-size:20px}
+    nav a{font-size:17px}
+    .hero{height:100svh;min-height:360px;position:relative;background:#000}
+    .hero img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
+    #acerca{padding:125px 6% 95px;min-height:100svh}
+    .about-back{position:fixed;top:20px;left:6%;z-index:6;display:grid;place-items:center;width:44px;height:44px;color:var(--green);background:transparent}
+    .about-back svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .about-back:hover{filter:drop-shadow(0 0 6px #9dff0090)}
+    .about-background{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000}
+    .about-background video{width:100%;height:100%;object-fit:cover;filter:blur(4px) saturate(.35);transform:scale(1.04);opacity:.23}
+    .about-background::after{content:'';position:absolute;inset:0;background:url('assets/grain.svg');opacity:.13}
+    #acerca .columns{position:relative;z-index:1}
+    #spark{position:fixed;left:0;top:0;width:18px;height:2px;background:var(--green);box-shadow:0 0 7px #9dff00;pointer-events:none;z-index:8;opacity:0;transform:translate(-100px,-100px) skewX(-30deg);transition:opacity .18s}
+    #spark::after{content:'';position:absolute;left:5px;top:5px;width:8px;height:1px;background:var(--green);opacity:.5}
+    .columns{display:grid;grid-template-columns:1fr 1fr;gap:8%}
+    article{min-width:0;scroll-margin-top:110px}
+    h2{font-size:34px;line-height:1.3;margin:0 0 35px;overflow-wrap:anywhere}
+    article p{font-size:18px;line-height:1.8;margin:0 0 24px}
+    @media(min-width:1500px){.columns{max-width:1400px;margin:auto}}
+    @media(max-width:700px){header{padding:18px 6%}.brand{font-size:16px}nav a{font-size:14px}.columns{grid-template-columns:1fr;gap:50px}#acerca{padding:100px 7% 65px}h2{font-size:28px;margin-bottom:22px}article p{font-size:17px;line-height:1.75}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.link,.link::after{transition:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav aria-label="Principal"><a class="title link" id="about-link" href="#acerca">Acerca</a></nav>
+  </header>
+  <main>
+    <section class="hero" id="inicio" aria-label="MOTOXORROS">
+      <img src="assets/motopills.gif" alt="Motopills, obra animada" fetchpriority="high">
+    </section>
+    <section id="acerca" aria-label="Acerca" hidden>
+      <a class="about-back" href="#inicio" aria-label="Volver al inicio" title="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7M5 12h14"/></svg></a>
+      <div class="about-background" aria-hidden="true">
+        <video id="about-video" muted loop playsinline preload="none" poster="assets/acerca-poster.jpg" tabindex="-1">
+          <source src="assets/acerca-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="columns">
+        <article id="bio">
+          <h2 class="title"><a class="link" href="#bio">Bio</a></h2>
+          <p>Soy artista y gestor cultural con base en Biobío y en diálogo constante con distintos contextos latinoamericanos. Mi práctica se desarrolla entre las artes mediales, la fabricación digital y el trabajo territorial, utilizando modelado y animación 3D, fotogrametría, electrónica, realidad virtual y aumentada, video e instalación. Mi investigación aborda las relaciones entre tecnologías, imaginarios latinoamericanos y territorio, articulando procesos de digitalización y rematerialización que cruzan objetos, imágenes y espacios físicos y virtuales.</p>
+          <p>Paralelamente, he desarrollado una trayectoria vinculada a proyectos de arte y comunidad, coordinando residencias, talleres y procesos colaborativos principalmente en el sur de Chile, Colombia y Argentina. Estas experiencias han desplazado progresivamente mi investigación hacia las transformaciones sociales, culturales y materiales producidas por infraestructuras tecnológicas y modelos extractivos.</p>
+          <p>Mi producción reciente explora las imágenes técnicas, las estéticas de aceleración y las relaciones entre máquinas, paisaje y formas contemporáneas de habitar. Trabajo con las tecnologías simultáneamente como herramientas, lenguajes y objetos de investigación, buscando tensionar las formas en que intervienen en nuestra percepción y transformación del territorio.</p>
+        </article>
+        <article id="statement">
+          <h2 class="title"><a class="link" href="#statement">Statement</a></h2>
+          <p>Desde el comienzo de mi carrera he desarrollado una práctica de plástica mixta, iniciada en el modelado 3D y sus posibilidades de materialización. Luego incorporé animación, fotogrametría, texturizado, electrónica y video, articulando interacciones entre mundo físico, virtual y mixto. Me interesa trabajar mediante ciclos en los que objetos, territorios e imágenes son digitalizados para convivir con otros signos, escalas y temporalidades, construyendo realidades alternas y cruzadas que, muchas veces, vuelven a materializarse como objetos e instalaciones. Los quiebres producidos entre estas dimensiones desplazan significados desde lo plástico y estético hacia lo conceptual, configurando el lenguaje particular de mi trabajo.</p>
+          <p>Estos desplazamientos dialogan con la idea de que todo desarrollo tecnológico contiene la posibilidad de producir su propio accidente y, en el caso de las tecnologías de simulación, alterar nuestra relación con la realidad. Desde allí observo las imágenes técnicas y los lenguajes mediante los cuales el territorio comienza a ser representado y operado. Tras años como coordinador de residencias artísticas comunitarias en el sur de Chile, he observado cómo estructuras extractivas producen efectos sociales, culturales y territoriales que reaparecen en biomas diferentes. Las zonas de sacrificio comienzan a compartir rasgos físicos, culturales y mentales, moldeados por tecnologías importadas que adquieren mínimas mutaciones locales.</p>
+          <p>Haberme criado, en gran parte, en el taller mecánico de mi familia estableció una relación temprana con sensores, actuadores y máquinas electromecánicas que hoy atraviesa mi capacidad de entender y construir dispositivos, mientras las estéticas de aceleración y carreras funcionan como filtro visual y simbólico. Me motiva comunicar plásticamente aquello que comprendo como presente utilizando herramientas que participan en su construcción. En un contexto extractivista, donde el efecto de las máquinas ya forma parte de nuestra cultura, pienso nuestro tiempo desde una contradicción temporal, donde el progreso no radica en dimensión o temporalidad alguna.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <span id="spark" aria-hidden="true"></span>
+  <script>
+    const aboutLink = document.querySelector('#about-link');
+    const home = document.querySelector('#inicio');
+    const about = document.querySelector('#acerca');
+    const spark = document.querySelector('#spark');
+    const backgroundVideo = document.querySelector('#about-video');
+    const reducedMotion = matchMedia('(prefers-reduced-motion:reduce)');
+    function syncVideo() {
+      if (!about.hidden && !document.hidden && !reducedMotion.matches) {
+        backgroundVideo.play().catch(() => {});
+      } else backgroundVideo.pause();
+    }
+    document.addEventListener('visibilitychange', syncVideo);
+    reducedMotion.addEventListener('change', syncVideo);
+    function showPage() {
+      const isAbout = ['#acerca', '#bio', '#statement'].includes(location.hash);
+      home.hidden = isAbout;
+      about.hidden = !isAbout;
+      document.querySelector('header').hidden = isAbout;
+      syncVideo();
+      document.title = isAbout ? 'Acerca | MOTOXORROS' : 'MOTOXORROS';
+      if (isAbout) aboutLink.setAttribute('aria-current', 'page');
+      else aboutLink.removeAttribute('aria-current');
+      spark.style.opacity = '0';
+      document.querySelectorAll('h2 a').forEach(link => link.classList.toggle('active', link.hash === location.hash));
+      if (location.hash === '#bio' || location.hash === '#statement') {
+        document.querySelector(location.hash).scrollIntoView();
+      } else scrollTo(0, 0);
+    }
+    addEventListener('hashchange', showPage);
+    showPage();
+    const pointerEffect = matchMedia('(pointer:fine) and (prefers-reduced-motion:no-preference)');
+    let fadeTimer;
+    document.addEventListener('pointermove', event => {
+      if (about.hidden || !pointerEffect.matches || event.pointerType === 'touch') return;
+      spark.style.transform = `translate(${event.clientX + 14}px, ${event.clientY + 17}px) skewX(-30deg)`;
+      spark.style.opacity = '.65';
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(() => spark.style.opacity = '0', 140);
+    });
+    document.addEventListener('pointerleave', () => spark.style.opacity = '0');
+  </script>
+</body>
+</html>
