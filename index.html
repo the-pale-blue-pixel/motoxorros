@@ -50,10 +50,12 @@
     @media(max-width:700px){header{padding:18px 6%}.brand{font-size:16px}nav a{font-size:14px}.columns{grid-template-columns:1fr;gap:50px}#acerca{padding:100px 7% 65px}h2{font-size:28px;margin-bottom:22px}article p{font-size:17px;line-height:1.75}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.link,.link::after{transition:none}}
   </style>
+<link rel="stylesheet" href="cartografias.css">
+  <script type="module" src="https://unpkg.com/@google/model-viewer@4.2.0/dist/model-viewer.min.js"></script>
 </head>
 <body>
   <header>
-    <nav aria-label="Principal"><a class="title link" id="about-link" href="#acerca">Acerca</a></nav>
+    <nav aria-label="Principal"><a class="title link" id="about-link" href="#acerca"><span class="chrome-text">Acerca</span></a><a class="title link" id="cartography-link" href="#cartografias"><span class="chrome-text">Cartografías de la Aceleración</span></a></nav>
   </header>
   <main>
     <section class="hero" id="inicio" aria-label="MOTOXORROS">
@@ -82,7 +84,19 @@
         </article>
       </div>
     </section>
+    <section id="cartografias" hidden aria-labelledby="cartography-intro">
+      <a class="about-back" href="#inicio" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 19-7-7 7-7M5 12h14"/></svg></a>
+      <h1 id="cartography-intro">Repositorio tridimensional de estéticas de la velocidad desde latinoamérica.</h1>
+      <div class="motion-control"><button id="motion-toggle" class="icon-button" type="button" aria-label="Pausar giro" title="Pausar giro" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="pause-symbol" d="M9 5v14M15 5v14"/><path class="play-symbol" d="m8 5 11 7-11 7Z"/></svg></button></div>
+      <div id="model-gallery"></div>
+    </section>
+    <dialog id="model-dialog" aria-labelledby="model-title">
+      <div class="viewer-top"><h2 id="model-title"></h2><button id="close-model" class="chrome-button" autofocus aria-label="Cerrar visor"><span class="chrome-text">Cerrar ×</span></button></div>
+      <model-viewer id="large-model" camera-controls touch-action="none" interaction-prompt="none" camera-orbit="35deg 75deg auto" exposure="1.2" shadow-intensity="0"></model-viewer>
+      <p id="viewer-status" role="status"></p>
+    </dialog>
   </main>
+  <script src="cartografias.js" defer></script>
   <span id="spark" aria-hidden="true"></span>
   <script>
     const aboutLink = document.querySelector('#about-link');
@@ -105,11 +119,14 @@
     reducedMotion.addEventListener('change', syncVideo);
     function showPage(hash = location.hash) {
       const isAbout = ['#acerca', '#bio', '#statement'].includes(hash);
-      home.hidden = isAbout;
+      const isCartography = hash === '#cartografias';
+      home.hidden = isAbout || isCartography;
+      document.querySelector('#cartografias').hidden = !isCartography;
+      document.querySelector('#cartography-link').toggleAttribute('aria-current', isCartography);
       about.hidden = !isAbout;
-      document.querySelector('header').hidden = isAbout;
+      document.querySelector('header').hidden = isAbout || isCartography;
       syncVideo();
-      document.title = isAbout ? 'Acerca | MOTOXORROS' : 'MOTOXORROS';
+      document.title = isAbout ? 'Acerca | MOTOXORROS' : isCartography ? 'Cartografías de la Aceleración | MOTOXORROS' : 'MOTOXORROS';
       if (isAbout) aboutLink.setAttribute('aria-current', 'page');
       else aboutLink.removeAttribute('aria-current');
       spark.style.opacity = '0';
